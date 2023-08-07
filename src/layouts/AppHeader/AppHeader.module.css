@@ -1,0 +1,14 @@
+.header {
+  height: 60px;
+  background: var(--white);
+  color: var(--dark2);
+}
+
+.nav {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px 0 15px;
+}
