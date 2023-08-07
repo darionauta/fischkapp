@@ -6,4 +6,17 @@
 
 body {
   background: #373737;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+:root {
+  --white: #ffffff;
+  --background: #f1f2f3;
+  --border: #ebebec;
+  --typo: #b6b6b6;
+  --accent: #161616;
+  --dark: #1c1c1c;
 }
