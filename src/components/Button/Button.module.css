@@ -1,0 +1,22 @@
+.button {
+    display: flex;
+    width: 110px;
+    padding: 10px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 22px;
+    background: var(--white);
+    box-shadow: none;
+    color: var(--accent);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.primary {
+    background-color: var(--accent);
+    color: var(--white);
+}

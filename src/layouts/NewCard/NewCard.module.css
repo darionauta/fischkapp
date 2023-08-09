@@ -1,0 +1,70 @@
+.card {
+    display: inline-block;
+    width: 343px;
+    min-height: 188px;
+    height: auto;
+    flex-shrink: 0;
+    perspective: 300px;
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+}
+
+.cardWrapper {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+}
+
+.cardFace {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    padding: 0 14px 14px 14px;
+}
+
+.cardWrapper.isFlipped {
+    transform: translateX(-100%) rotateY(-180deg);
+    -webkit-transform: translateX(-100%) rotateY(-180deg);
+    -moz-transform: translateX(-100%) rotateY(-180deg);
+    -ms-transform: translateX(-100%) rotateY(-180deg);
+    -o-transform: translateX(-100%) rotateY(-180deg);
+}
+
+  .cardFaceBack {
+    transform: rotateY(180deg);
+  }
+
+  .bottomNav {
+    position: relative;
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+    bottom: 0;
+    right: 0;
+  }
+
+  .frontFaceText {
+    width: 100%;
+    margin-top: 28px;
+    text-align: left;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 400;
+  }
