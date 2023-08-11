@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import FaceFront from './FaceFront';
 import FaceBack from './FaceBack';
-import styles from './NewCard.module.css';
+import styles from '../../assets/styles/Card.module.css';
 
 export default function():ReactElement {
 
