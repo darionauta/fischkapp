@@ -1,7 +1,13 @@
 .header {
+  position: fixed;
+  display: flex;
+  width: inherit;
+  top: 0;
   height: 60px;
-  background: var(--white);
+  min-height: 60px;
+  background-color: var(--white);
   color: var(--dark2);
+  z-index: 1;
 }
 
 .nav {

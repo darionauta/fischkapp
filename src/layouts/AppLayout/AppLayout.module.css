@@ -1,6 +1,10 @@
 .layout {
+  display: flex;
+  flex-direction: column;
+  width: 375px;
   max-width: 375px;
   height: 755px;
+  align-items: center;
   margin: 1% auto;
-  background: #f1f2f3;
+  background-color: #f1f2f3;
 }
