@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput/TextInput";
-import styles from './NewCard.module.css';
+import styles from '../../assets/styles/Card.module.css';
 
 export default function ():ReactElement {
     

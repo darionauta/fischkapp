@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useRef, useEffect } from "react";
 import styles from './TextInput.module.css';
 
 type TextProps = {
@@ -7,6 +7,13 @@ type TextProps = {
 }
 
 export default function({ top, bottom }: TextProps):ReactElement {
+
+    const inputRef = useRef<null | HTMLSpanElement>(null);
+
+    useEffect(() => {
+        inputRef?.current?.focus();
+    }, []);
+
     const margins = {
         marginTop: 0,
         marginBottom: 0
@@ -16,7 +23,7 @@ export default function({ top, bottom }: TextProps):ReactElement {
 
     return (
         <div className={styles.container} style={margins}>
-            <span className={styles.textarea} contentEditable></span>
+            <span className={styles.textarea} contentEditable ref={inputRef}></span>
         </div>
     )
 }
