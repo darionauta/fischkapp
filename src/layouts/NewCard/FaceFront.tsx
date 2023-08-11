@@ -7,7 +7,7 @@ export default function ():ReactElement {
     
     return (
         <div className={styles.cardFace}>
-            <TextInput top={50} bottom={24} />
+            <TextInput top={50} bottom={46} />
             <nav className={styles.bottomNav}>
                 <Button text="Cancel" />
                 <Button text="Next" primary />

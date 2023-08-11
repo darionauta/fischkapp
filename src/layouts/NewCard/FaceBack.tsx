@@ -9,7 +9,7 @@ export default function():ReactElement {
         <div className={`${styles.cardFace} ${styles.cardFaceBack}`}>
             <span className={styles.frontFaceText}></span>
             <DeleteButton />
-            <TextInput top={8} bottom={24} />
+            <TextInput top={8} bottom={46} />
             <nav className={styles.bottomNav}>
                 <Button text='Back' />
                 <Button text='Save' primary />
