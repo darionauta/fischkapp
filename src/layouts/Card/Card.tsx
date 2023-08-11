@@ -7,6 +7,7 @@ export default function():ReactElement {
 
     const [ isFlipped, setIsFlipped ] = useState(false);
     const [ isEditMode, setIsEditMode ] = useState(false);
+    // Flip card :)
     const flip = () => setIsFlipped(prev => !prev);
     
     return (
