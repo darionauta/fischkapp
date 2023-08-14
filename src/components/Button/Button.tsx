@@ -1,15 +1,16 @@
-import { ReactElement } from "react";
+import { MouseEventHandler, ReactElement } from "react";
 import styles from './Button.module.css';
 
 type ButtonProps = {
     text: string,
-    primary?: boolean
+    primary?: boolean,
+    onClick?: MouseEventHandler
 }
 
-export default function({text, primary}: ButtonProps):ReactElement {
+export default function({text, primary, onClick}: ButtonProps):ReactElement {
     
     return (
-        <button className={`${styles.button} ${primary && styles.primary}`}>
+        <button className={`${styles.button} ${primary && styles.primary}`} onClick={onClick}>
             { text }
         </button>
     )
