@@ -1,7 +1,6 @@
-import { ReactElement, useState, useRef } from "react";
+import { ReactElement } from "react";
 import styles from '../../assets/styles/Card.module.css';
 import EditButton from "../../components/EditButton";
-import Edit from "./Edit";
 import { FaceProps } from './types';
 
 export default function({ flip, setEditMode, cardSide }: FaceProps):ReactElement {
