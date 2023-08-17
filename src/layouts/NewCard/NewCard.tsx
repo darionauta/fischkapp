@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState, useRef } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import FaceFront from './FaceFront';
 import FaceBack from './FaceBack';
 import styles from '../../assets/styles/Card.module.css';

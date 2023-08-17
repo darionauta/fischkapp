@@ -5,7 +5,7 @@ import CardsList from './layouts/CardsList';
 import { NewCardContextProvider } from './context/NewCardContext';
 import "./App.css";
 import NewCard from './layouts/NewCard';
-import Card from './layouts/Card';
+import { CardsContextProvider } from './context/CardsContext';
 
 export default function App():ReactElement {
 
@@ -13,10 +13,11 @@ export default function App():ReactElement {
     <AppLayout>
       <NewCardContextProvider>
         <AppHeader />
-        <CardsList>
-          <NewCard />
-          <Card />
-        </CardsList>
+        <CardsContextProvider>
+          <CardsList>
+            <NewCard />
+          </CardsList>
+        </CardsContextProvider>
       </NewCardContextProvider>
     </AppLayout>
   );

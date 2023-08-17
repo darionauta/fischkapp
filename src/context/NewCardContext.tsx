@@ -10,16 +10,18 @@ export type NewCard = {
 
 export type NewCardContextType = NewCard | null;
 
+const initialState = {front: '', back: '', id: 0}
+
 const NewCardContext = createContext<NewCardContextType>({
     isNewCardVisible: false,
     showNewCard: () => {},
-    cardsText: {front: '', back: ''},
+    cardsText: initialState,
     setText: () => {}
 });
 
 function NewCardContextProvider({ children }: PropsWithChildren) {
     const [ isNewCardVisible, setIsNewCardVisible ] = useState(false);
-    const [ cardsText, setCardsText ] = useState({ front: '', back: ''});
+    const [ cardsText, setCardsText ] = useState(initialState);
 
     const showNewCard = (state: boolean): void => {
         setIsNewCardVisible(state);
