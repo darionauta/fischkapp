@@ -5,19 +5,27 @@ import TextInput from "../../components/TextInput/TextInput";
 import styles from '../../assets/styles/Card.module.css';
 import { FlipType } from "./types";
 import { NewCardContext } from "../../context/NewCardContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { CardType } from "../Card/types";
+import { CardsContext } from "../../context/CardsContext";
 
 export default function({ flip }: FlipType):ReactElement {
 
-    const { setText, cardsText } = useContext(NewCardContext) ?? {};
-    const [ storageValue, setStorageValue ] = useLocalStorage({key: 'cards', initialState: []});
+    const { setText, cardsText, showNewCard } = useContext(NewCardContext) ?? {};
+    const { saveCards } = useContext(CardsContext);
 
     const handleGetText = (value: string) => {
         setText && cardsText && setText({ ...cardsText, back: value });
     }
 
     const handleClickSave = () => {
-        setStorageValue([...storageValue, {...cardsText, id: Date.now()}]);
+        if(!cardsText) return;
+        const newCard: CardType = {
+            ...cardsText, id: Date.now()
+        }
+        saveCards(newCard);
+        showNewCard && showNewCard(false);
+        flip(false);
+        setText && setText({ front: '', back: '', id: 0});
     }
 
     return (
