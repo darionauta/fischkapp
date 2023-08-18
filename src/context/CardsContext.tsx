@@ -11,11 +11,14 @@ const initialState: CardType[] = [
 
 export type CardsContextType = {
     cards: CardType[], 
-    saveCards: (newCard: CardType) => void}
+    saveCards: (newCard: CardType) => void,
+    removeCard: (card: CardType) => void
+}
 
 const CardsContext = createContext<CardsContextType>({
     cards: initialState,
-    saveCards: () => {}
+    saveCards: () => {},
+    removeCard: () => {}
 });
 
 function CardsContextProvider({ children }: PropsWithChildren) {
@@ -24,9 +27,19 @@ function CardsContextProvider({ children }: PropsWithChildren) {
     const saveCards = (newCard: CardType):void => {
         setCards([ ...cards, newCard]);
     }
+
+    const removeCard = (card: CardType):void => {
+        const tmpCards = cards.filter(item => item.id !== card.id);
+        setCards([...tmpCards]);
+        alert('The card has been removed');
+    }
     
     return (
-        <CardsContext.Provider value={{cards, saveCards}}>
+        <CardsContext.Provider value={{
+            cards, 
+            saveCards,
+            removeCard
+        }}>
             { children }
         </CardsContext.Provider>
     )
