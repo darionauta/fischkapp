@@ -1,9 +1,6 @@
-export type CardProps = {
-    setEditMode: (status: boolean) => void,
-}
-
-export interface FaceProps extends CardProps {
+export type FaceProps = {
     flip: () => void,
+    setEditMode: (status: boolean) => void,
     cardSide: 'front' | 'back'
 }
 

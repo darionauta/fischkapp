@@ -41,7 +41,7 @@ export default function({ flip }: FlipType):ReactElement {
                 { cardsText && cardsText.front }
             </span>
             <DeleteButton onClick={handleCancel} />
-            <TextInput top={8} bottom={46} getText={handleGetText} />
+            <TextInput top={8} bottom={46} getText={handleGetText} text='' />
             <nav className={styles.bottomNav}>
                 <Button text='Back' onClick={_ => flip(false)} />
                 <Button text='Save' primary onClick={handleClickSave} />
