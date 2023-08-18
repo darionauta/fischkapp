@@ -17,10 +17,10 @@ export default function({ card }: Props):ReactElement {
     const flip = () => setIsFlipped(prev => !prev);
     
     return (
-        <CardContextProvider data={card}>
+        <CardContextProvider card={card}>
             <div className={styles.card}>
                 { 
-                    isEditMode ? <Edit setEditMode={setIsEditMode} /> : 
+                    isEditMode ? <Edit flip={flip} cardSide={isFlipped ? 'back' : 'front'} setEditMode={setIsEditMode} /> : 
                     <div className={`${styles.cardWrapper} ${isFlipped ? styles.isFlipped : ''}`}>
                         <FaceCard cardSide='front' flip={flip} setEditMode={setIsEditMode} />
                         <FaceCard cardSide='back' flip={flip} setEditMode={setIsEditMode} />

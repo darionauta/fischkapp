@@ -5,7 +5,7 @@ import { FaceProps } from './types';
 import { CardContext } from "../../context/CardContext";
 
 export default function({ flip, setEditMode, cardSide }: FaceProps):ReactElement {
-    const cardData = useContext(CardContext);
+    const { card } = useContext(CardContext);
     
     const classNames = `${styles.cardFace} ${cardSide === 'back' ? styles.cardFaceBack : ''}`;
 
@@ -13,7 +13,7 @@ export default function({ flip, setEditMode, cardSide }: FaceProps):ReactElement
         <div className={classNames}>
             <EditButton setEdit={setEditMode} />
             <div className={styles.cardContent} onClick={flip}>
-                { cardSide === 'front' ? cardData.front : cardData.back }
+                { cardSide === 'front' ? card.front : card.back }
             </div>
         </div>
     )

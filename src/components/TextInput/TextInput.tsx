@@ -4,12 +4,13 @@ import styles from './TextInput.module.css';
 type TextProps = {
     top?: number;
     bottom?: number;
-    getText?: (value: string) => void
+    getText?: (value: string) => void;
+    text: string;
 }
 
-export default function({ top, bottom, getText }: TextProps):ReactElement {
+export default function({ top, bottom, getText, text }: TextProps):ReactElement {
     const inputRef = useRef<null | HTMLTextAreaElement>(null);
-    const [ value, setValue ] = useState('');
+    const [ value, setValue ] = useState(text);
 
     useEffect(() => {
         inputRef?.current?.focus();

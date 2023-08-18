@@ -24,8 +24,15 @@ const CardsContext = createContext<CardsContextType>({
 function CardsContextProvider({ children }: PropsWithChildren) {
     const [ cards, setCards ] = useState<CardType[]>(initialState);
 
-    const saveCards = (newCard: CardType):void => {
-        setCards([ ...cards, newCard]);
+    const saveCards = (card: CardType):void => {
+        let tmpCards = cards;
+        let indexToUpdate = cards.findIndex(item => item.id === card.id);
+        if(indexToUpdate > -1) { 
+            tmpCards[indexToUpdate] = card;
+            setCards([...tmpCards]);
+        } else {
+            setCards([ ...cards, card]);
+        }
     }
 
     const removeCard = (card: CardType):void => {
@@ -33,7 +40,7 @@ function CardsContextProvider({ children }: PropsWithChildren) {
         setCards([...tmpCards]);
         alert('The card has been removed');
     }
-    
+
     return (
         <CardsContext.Provider value={{
             cards, 
