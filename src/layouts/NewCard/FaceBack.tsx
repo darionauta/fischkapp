@@ -28,12 +28,19 @@ export default function({ flip }: FlipType):ReactElement {
         setText && setText({ front: '', back: '', id: 0});
     }
 
+    const handleCancel = ():void => { 
+        showNewCard && showNewCard(false);
+        flip(false);
+        setText && setText( { front: '', back: '', id: 0})
+    }
+
+
     return (
         <div className={`${styles.cardFace} ${styles.cardFaceBack}`}>
             <span className={styles.frontFaceText}>
                 { cardsText && cardsText.front }
             </span>
-            <DeleteButton />
+            <DeleteButton onClick={handleCancel} />
             <TextInput top={8} bottom={46} getText={handleGetText} />
             <nav className={styles.bottomNav}>
                 <Button text='Back' onClick={_ => flip(false)} />
