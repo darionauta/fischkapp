@@ -1,13 +1,10 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { CardType } from "../layouts/Card/types";
+import useFetch from "../hooks/useFetch";
+import AppHeader from "../layouts/AppHeader";
 
-const initialState: CardType[] = [
-    {
-        id: 0,
-        front: 'Fish',
-        back: 'Il pesco'
-    }
-];
+
+const initialState: CardType[] = [];
 
 export type CardsContextType = {
     cards: CardType[], 
@@ -23,10 +20,15 @@ const CardsContext = createContext<CardsContextType>({
 
 function CardsContextProvider({ children }: PropsWithChildren) {
     const [ cards, setCards ] = useState<CardType[]>(initialState);
+    const { error, loading, getAll } = useFetch();
+
+    useEffect(() => {
+        getAll().then(setCards);
+    }, [ getAll ]);
 
     const saveCards = (card: CardType):void => {
         let tmpCards = cards;
-        let indexToUpdate = cards.findIndex(item => item.id === card.id);
+        let indexToUpdate = cards.findIndex(item => item._id === card._id);
         if(indexToUpdate > -1) { 
             tmpCards[indexToUpdate] = card;
             setCards([...tmpCards]);
@@ -36,9 +38,17 @@ function CardsContextProvider({ children }: PropsWithChildren) {
     }
 
     const removeCard = (card: CardType):void => {
-        const tmpCards = cards.filter(item => item.id !== card.id);
+        const tmpCards = cards.filter(item => item._id !== card._id);
         setCards([...tmpCards]);
         alert('The card has been removed');
+    }
+
+    const Loading = () => {
+        return <div style={{ marginTop: '150px' }}>Loading...</div>
+    }
+
+    if(error) {
+        return <div style={{ marginTop: '150px'}}>{error}</div>
     }
 
     return (
@@ -47,7 +57,8 @@ function CardsContextProvider({ children }: PropsWithChildren) {
             saveCards,
             removeCard
         }}>
-            { children }
+            <AppHeader />
+            { loading ? <Loading /> : children }
         </CardsContext.Provider>
     )
 }
