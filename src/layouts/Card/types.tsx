@@ -7,5 +7,5 @@ export type FaceProps = {
 export type CardType = {
     front: string,
     back: string,
-    id: number
+    _id: string
 }

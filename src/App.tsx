@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import AppHeader from "./layouts/AppHeader";
 import AppLayout from "./layouts/AppLayout";
 import CardsList from './layouts/CardsList';
 import { NewCardContextProvider } from './context/NewCardContext';
@@ -12,7 +11,6 @@ export default function App():ReactElement {
   return (
     <AppLayout>
       <NewCardContextProvider>
-        <AppHeader />
         <CardsContextProvider>
           <CardsList>
             <NewCard />

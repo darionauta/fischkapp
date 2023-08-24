@@ -10,7 +10,7 @@ export type NewCard = {
 
 export type NewCardContextType = NewCard | null;
 
-const initialState = {front: '', back: '', id: 0}
+const initialState = {front: '', back: '', _id: ''}
 
 const NewCardContext = createContext<NewCardContextType>({
     isNewCardVisible: false,

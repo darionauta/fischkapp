@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useState } from "react";
 import { CardType } from "../layouts/Card/types";
 
-const initialState = {front: '', back: '', id: 0}
+const initialState = {front: '', back: '', _id: ''}
 
 interface Props extends PropsWithChildren {
     card: CardType;

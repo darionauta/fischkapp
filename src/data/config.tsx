@@ -1,0 +1,1 @@
+export const URL = 'https://training.nerdbord.io/api/v1/fischkapp/flashcards';
