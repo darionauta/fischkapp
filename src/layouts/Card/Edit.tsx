@@ -21,8 +21,8 @@ export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
     }
 
     const handleSaveClick = () => {
-        console.log(cardText);
         updateCard(cardText).then(() => {
+            if(error) return;
             setText && setText(cardText);
             saveCards(cardText);
         });
