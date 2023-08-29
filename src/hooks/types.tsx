@@ -9,8 +9,14 @@ export type CardApi = {
     __v: number
 }
 
+export type UpdateCardBody = {
+    id: string,
+    front: string,
+    back: string
+}
+
 export type FetchProps = {
     method: string,
-    body?: SaveCardProps,
+    body?: SaveCardProps | UpdateCardBody,
     id?: string
 }

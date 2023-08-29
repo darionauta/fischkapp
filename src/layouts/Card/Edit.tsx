@@ -12,7 +12,7 @@ export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
     const { card, setText } = useContext(CardContext);
     const [ cardText, setCardText ] = useState<CardType>(card);
     const { removeCard, saveCards } = useContext(CardsContext);
-    const { deleteCard, error } = useFetch();
+    const { error, deleteCard, updateCard } = useFetch();
 
     const handleDeleteClick = () => {
         if(!card?._id) return;
@@ -21,8 +21,11 @@ export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
     }
 
     const handleSaveClick = () => {
-        setText && setText(cardText);
-        saveCards(cardText);
+        updateCard(cardText).then(() => {
+            if(error) return;
+            setText && setText(cardText);
+            saveCards(cardText);
+        });
         setEditMode(false);
     }
 

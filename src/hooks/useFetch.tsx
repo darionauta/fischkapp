@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { URL } from '../data/config';
 import { FetchProps } from './types';
-import { SaveCardProps } from '../layouts/Card/types';
+import { CardType, SaveCardProps } from '../layouts/Card/types';
 
 const headers = {
     'Content-Type': 'application/json'
@@ -63,5 +63,11 @@ export default function(){
         return result;
     }, []);
 
-    return { error, loading, getAll, saveCard, deleteCard };
+    const updateCard = useMemo(() => async(card: CardType) => {
+        const { _id, front, back } = card;
+        const result = await fetchApi({ method: 'PATCH', id: _id, body: { id: _id, front, back }});
+        return result;
+    }, []);
+
+    return { error, loading, getAll, saveCard, deleteCard, updateCard };
 };
