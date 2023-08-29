@@ -1,17 +1,26 @@
 import { useState, useMemo } from 'react';
 import { URL } from '../data/config';
 import { FetchProps } from './types';
-import { CardType } from '../layouts/Card/types';
+import { SaveCardProps } from '../layouts/Card/types';
 
 const headers = {
     'Content-Type': 'application/json'
+}
+
+function getHeaders(method: string){
+    if(method.toUpperCase() === 'GET' ) return headers;
+    return {
+        ...headers,
+        'Authorization': import.meta.env.VITE_API_KEY
+    }
 }
 
 function getUrl(url: string, id?: string){
     return id ? `${url}/${id}` : url;
 }
 
-function getParams(method: string, body?:CardType){
+function getParams(method: string, body?:SaveCardProps){
+    const headers = getHeaders(method);
     return {
         headers,
         method,
@@ -39,9 +48,14 @@ export default function(){
         const result = await fetchApi({ method: 'GET'});
         if(result?.error) { setError('Fetch error'); return [];}
         setLoading(false);
-        console.log(result);
         return result;
     }, []);
 
-    return { error, loading, getAll };
+    const saveCard = useMemo(() => async (body: SaveCardProps) => {
+        const result = await fetchApi({ method: 'POST', body: body});
+        if(result?.error) { setError('Save card error'); return {};}
+        return result;
+    }, []);
+
+    return { error, loading, getAll, saveCard };
 };
