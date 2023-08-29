@@ -57,5 +57,11 @@ export default function(){
         return result;
     }, []);
 
-    return { error, loading, getAll, saveCard };
+    const deleteCard = useMemo(() => async (id: string) => {
+        const result = await fetchApi({ method: 'DELETE', id});
+        if(result?.error) { setError('Delete card error'); return {};}
+        return result;
+    }, []);
+
+    return { error, loading, getAll, saveCard, deleteCard };
 };

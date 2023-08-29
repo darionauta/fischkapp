@@ -6,14 +6,17 @@ import styles from '../../assets/styles/Card.module.css';
 import { CardContext } from "../../context/CardContext";
 import { CardsContext } from "../../context/CardsContext";
 import { CardType, FaceProps } from "./types";
+import useFetch from "../../hooks/useFetch";
 
 export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
     const { card, setText } = useContext(CardContext);
     const [ cardText, setCardText ] = useState<CardType>(card);
     const { removeCard, saveCards } = useContext(CardsContext);
+    const { deleteCard, error } = useFetch();
 
     const handleDeleteClick = () => {
-        removeCard(card);
+        if(!card?._id) return;
+        deleteCard(card._id).then(() => removeCard(card));
         setEditMode(false);
     }
 
