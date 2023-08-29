@@ -9,3 +9,5 @@ export type CardType = {
     back: string,
     _id: string
 }
+
+export type SaveCardProps = Omit<CardType, '_id'>

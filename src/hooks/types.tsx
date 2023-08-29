@@ -1,4 +1,4 @@
-import { CardType } from "../layouts/Card/types"
+import { CardType, SaveCardProps } from "../layouts/Card/types"
 
 export type CardApi = {
     front: string,
@@ -11,6 +11,6 @@ export type CardApi = {
 
 export type FetchProps = {
     method: string,
-    body?: CardType,
+    body?: SaveCardProps,
     id?: string
 }

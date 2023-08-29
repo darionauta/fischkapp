@@ -5,13 +5,16 @@ import TextInput from "../../components/TextInput/TextInput";
 import styles from '../../assets/styles/Card.module.css';
 import { FlipType } from "./types";
 import { NewCardContext } from "../../context/NewCardContext";
-import { CardType } from "../Card/types";
+import { CardType, SaveCardProps } from "../Card/types";
 import { CardsContext } from "../../context/CardsContext";
+import useFetch from "../../hooks/useFetch";
 
 export default function({ flip }: FlipType):ReactElement {
 
     const { setText, cardsText, showNewCard } = useContext(NewCardContext) ?? {};
     const { saveCards } = useContext(CardsContext);
+    const { error, saveCard } = useFetch();
+    
 
     const handleGetText = (value: string) => {
         setText && cardsText && setText({ ...cardsText, back: value });
@@ -19,19 +22,20 @@ export default function({ flip }: FlipType):ReactElement {
 
     const handleClickSave = () => {
         if(!cardsText) return;
-        const newCard: CardType = {
-            ...cardsText, id: Date.now()
-        }
-        saveCards(newCard);
+        saveCard(cardsText).then(data => { 
+            if(error || !data) return;
+            const {front, back, _id} = data.flashcard;
+            saveCards({ front, back, _id});
+        });
         showNewCard && showNewCard(false);
         flip(false);
-        setText && setText({ front: '', back: '', id: 0});
+        setText && setText({ front: '', back: ''});
     }
 
     const handleCancel = ():void => { 
         showNewCard && showNewCard(false);
         flip(false);
-        setText && setText( { front: '', back: '', id: 0})
+        setText && setText( { front: '', back: ''})
     }
 
 
