@@ -6,9 +6,9 @@ describe('Test displaying flashcards', () => {
     it('should contain at least one child element', () => {
         
         const mockCards = [
-            { _id: "1", front: "Marko", back: "Polo" },
-            { _id: "1", front: "Marko", back: "Polo" },
-            { _id: "1", front: "Marko", back: "Polo" },
+            { _id: "asfasv", front: "Marko", back: "Polo" },
+            { _id: "sdczdc", front: "Marko", back: "Polo" },
+            { _id: "sdcsd6", front: "Marko", back: "Polo" },
         ];
         
         render(
