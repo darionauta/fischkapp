@@ -23,8 +23,8 @@ export default function({ flip }: FlipType):ReactElement {
     const handleClickSave = () => {
         if(!cardsText) return;
         saveCard(cardsText).then(data => { 
-            if(error || !data) return;
-            const {front, back, _id} = data.flashcard;
+            if(error || !data?.flashcard) return;
+            const {front, back, _id} = data?.flashcard;
             saveCards({ front, back, _id});
         });
         showNewCard && showNewCard(false);
@@ -45,7 +45,7 @@ export default function({ flip }: FlipType):ReactElement {
                 { cardsText && cardsText.front }
             </span>
             <DeleteButton onClick={handleCancel} />
-            <TextInput top={8} bottom={46} getText={handleGetText} text='' />
+            <TextInput data-testid="inoput-back" top={8} bottom={46} getText={handleGetText} text='' />
             <nav className={styles.bottomNav}>
                 <Button text='Back' onClick={_ => flip(false)} />
                 <Button text='Save' primary onClick={handleClickSave} />

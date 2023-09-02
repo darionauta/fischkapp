@@ -12,7 +12,7 @@ export default function({ children }: CardsListProps):ReactElement {
     const { cards } = useContext(CardsContext);
 
     return (
-        <div className={styles.cardsList}>
+        <div className={styles.cardsList} data-testid="cards-list">
             { children }
             { cards && cards.map((item: CardType, index: number) => {
                 return <Card card={item} key={index} />

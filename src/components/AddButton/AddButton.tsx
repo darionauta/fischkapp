@@ -8,7 +8,7 @@ export default function():ReactElement {
     
     if(!showNewCard) return ( <></> )
     return (
-        <button className={styles.addButton} onClick={_ => showNewCard(true)}>
+        <button data-testid="add-button" className={styles.addButton} onClick={_ => showNewCard(true)}>
             <Plus />
         </button>
     )

@@ -19,7 +19,7 @@ export default function ({ flip }: FlipType):ReactElement {
     if( !showNewCard) return ( <></> )
     return (
         <div className={styles.cardFace}>
-            <TextInput top={50} bottom={46} getText={handleFrontText} />
+            <TextInput data-testid="input-front" text="" top={50} bottom={46} getText={handleFrontText} />
             <nav className={styles.bottomNav}>
                 <Button text="Cancel" onClick={_ => showNewCard(false)} />
                 <Button text="Next" primary onClick={handleClick}/>
