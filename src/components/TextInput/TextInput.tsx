@@ -36,7 +36,7 @@ export default function({ top, bottom, getText, text }: TextProps):ReactElement 
 
     return (
         <div className={styles.container} style={margins}>
-            <textarea className={styles.textarea} rows={1} ref={inputRef} onChange={handleChangeText} value={value}></textarea>
+            <textarea data-testid="textarea" className={styles.textarea} rows={1} ref={inputRef} onChange={handleChangeText} value={value}></textarea>
         </div>
     )
 }
