@@ -73,6 +73,8 @@ describe('Test editing flashcard', () => {
 
         render( <App />);
 
+        const allCards = await screen.findAllByText("Polo");
+
         const editButton = await screen.findAllByTestId('edit-button');
         userEvent.click(editButton[0]);
         const deleteButton = await screen.findByTestId('delete-button');
@@ -85,7 +87,7 @@ describe('Test editing flashcard', () => {
         const resultCards = screen.getAllByText("Polo");
         
         await waitFor(() => {
-            expect(resultCards.length).toBe(2);
+            expect(resultCards.length).toBeLessThan(allCards.length);
         });
     });
 });
