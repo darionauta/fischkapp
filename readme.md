@@ -6,6 +6,10 @@ This project aims to create a simple app that supports learning.
 
 ---
 
+Live: [https://darionauta.github.io/fischkapp](https://darionauta.github.io/fischkapp)
+
+---
+
 ### 📝 Project requirements
 
 - should be possible to add new flashcard
