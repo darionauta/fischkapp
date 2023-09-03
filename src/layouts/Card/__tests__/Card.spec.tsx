@@ -1,10 +1,11 @@
 import { describe, expect, vi } from "vitest";
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { findAllByText, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createErrorResponse, createFetchResponse, MOCK_CARDS } from "../../../test/createFetchResponse";
 import App from "../../../App";
 
 describe('Test editing flashcard', () => {
+
 
     it('It should not be possible to edit a flashcard by clicking Save button when edited value is empty', async () => {
 
@@ -79,6 +80,12 @@ describe('Test editing flashcard', () => {
         
         await waitFor(() => {
             expect(window.alert).toHaveBeenCalledOnce();
+        });
+
+        const resultCards = screen.getAllByText("Polo");
+        
+        await waitFor(() => {
+            expect(resultCards.length).toBe(2);
         });
     });
 });
