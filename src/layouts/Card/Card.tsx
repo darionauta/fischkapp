@@ -20,7 +20,7 @@ export default function({ card }: Props):ReactElement {
         <CardContextProvider card={card}>
             <div className={styles.card}>
                 { 
-                    isEditMode ? <Edit flip={flip} cardSide={isFlipped ? 'back' : 'front'} setEditMode={setIsEditMode} /> : 
+                    isEditMode ? <Edit data-testid='edit-element' flip={flip} cardSide={isFlipped ? 'back' : 'front'} setEditMode={setIsEditMode} /> : 
                     <div className={`${styles.cardWrapper} ${isFlipped ? styles.isFlipped : ''}`}>
                         <FaceCard cardSide='front' flip={flip} setEditMode={setIsEditMode} />
                         <FaceCard cardSide='back' flip={flip} setEditMode={setIsEditMode} />
