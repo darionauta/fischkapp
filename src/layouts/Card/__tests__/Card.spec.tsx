@@ -63,4 +63,22 @@ describe('Test editing flashcard', () => {
             expect(screen.queryAllByTestId('edit-element').length).toBe(0);
         });
     });
+
+    it('Should delete flashcard from the list when clicking on Trash icon', async () => {
+        
+        global.fetch = vi.fn().mockResolvedValue(createFetchResponse(MOCK_CARDS, true));
+        
+        vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+        render( <App />);
+
+        const editButton = await screen.findAllByTestId('edit-button');
+        userEvent.click(editButton[0]);
+        const deleteButton = await screen.findByTestId('delete-button');
+        fireEvent.click(deleteButton);
+        
+        await waitFor(() => {
+            expect(window.alert).toHaveBeenCalledOnce();
+        });
+    });
 });

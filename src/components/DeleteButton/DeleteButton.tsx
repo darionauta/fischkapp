@@ -10,7 +10,7 @@ type Props = {
 export default function({ onClick }: Props):ReactElement {
 
     return (
-        <button className={styles.deleteButton} onClick={onClick}>
+        <button data-testid="delete-button" className={styles.deleteButton} onClick={onClick}>
             <TrashCan />
         </button>
     )
