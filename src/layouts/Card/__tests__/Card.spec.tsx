@@ -1,10 +1,11 @@
 import { describe, expect, vi } from "vitest";
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { findAllByText, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createErrorResponse, createFetchResponse, MOCK_CARDS } from "../../../test/createFetchResponse";
 import App from "../../../App";
 
 describe('Test editing flashcard', () => {
+
 
     it('It should not be possible to edit a flashcard by clicking Save button when edited value is empty', async () => {
 
@@ -61,6 +62,32 @@ describe('Test editing flashcard', () => {
 
         await waitFor(() => {
             expect(screen.queryAllByTestId('edit-element').length).toBe(0);
+        });
+    });
+
+    it('Should delete flashcard from the list when clicking on Trash icon', async () => {
+        
+        global.fetch = vi.fn().mockResolvedValue(createFetchResponse(MOCK_CARDS, true));
+        
+        vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+        render( <App />);
+
+        const allCards = await screen.findAllByText("Polo");
+
+        const editButton = await screen.findAllByTestId('edit-button');
+        userEvent.click(editButton[0]);
+        const deleteButton = await screen.findByTestId('delete-button');
+        fireEvent.click(deleteButton);
+        
+        await waitFor(() => {
+            expect(window.alert).toHaveBeenCalledOnce();
+        });
+
+        const resultCards = screen.getAllByText("Polo");
+        
+        await waitFor(() => {
+            expect(resultCards.length).toBeLessThan(allCards.length);
         });
     });
 });
