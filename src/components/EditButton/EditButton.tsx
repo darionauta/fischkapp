@@ -9,7 +9,7 @@ type ButtonProps = {
 export default function({ setEdit }: ButtonProps):ReactElement {
 
     return (
-        <button className={styles.editButton} onClick={ _ => setEdit(true) }>
+        <button data-testid="edit-button" className={styles.editButton} onClick={ _ => setEdit(true) }>
             <Pencil />
         </button>
     )
