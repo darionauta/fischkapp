@@ -5,7 +5,7 @@ import styles from '../../assets/styles/Card.module.css';
 import { NewCardContext } from "../../context/NewCardContext";
 import { FlipType } from "./types";
 
-export default function ({ flip }: FlipType):ReactElement {
+export default function ({ flip, isFlipped }: FlipType):ReactElement {
     const { showNewCard, setText, cardsText } = useContext(NewCardContext) ?? {};
 
     const handleClick = () => {
@@ -18,7 +18,7 @@ export default function ({ flip }: FlipType):ReactElement {
     }
     
     const handleFrontText = (value: string) => {
-        setText && cardsText && setText({ ...cardsText, front: value});
+        !isFlipped && setText && cardsText && setText({ ...cardsText, front: value});
     }
 
     if( !showNewCard) return ( <></> )

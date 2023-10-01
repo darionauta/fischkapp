@@ -9,15 +9,17 @@ type TextProps = {
 }
 
 export default function({ top, bottom, getText, text }: TextProps):ReactElement {
-    const inputRef = useRef<null | HTMLTextAreaElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const [ value, setValue ] = useState(text);
 
     useEffect(() => {
-        inputRef?.current?.focus();
+        // inputRef.current?.focus();
+        let textField = document.querySelectorAll('textarea')[0];
+        textField.focus();
     }, []);
-
+    
     useEffect(() => {
-        if(!inputRef.current || value === '') return;
+        if(!inputRef.current) return;
         inputRef.current.style.height = 'auto';
         inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }, [value]);
@@ -36,7 +38,13 @@ export default function({ top, bottom, getText, text }: TextProps):ReactElement 
 
     return (
         <div className={styles.container} style={margins}>
-            <textarea data-testid="textarea" className={styles.textarea} rows={1} ref={inputRef} onChange={handleChangeText} value={value}></textarea>
+            <textarea 
+                ref={inputRef} 
+                data-testid="textarea" 
+                className={styles.textarea} 
+                rows={1} 
+                onChange={handleChangeText} 
+                value={value}></textarea>
         </div>
     )
 }

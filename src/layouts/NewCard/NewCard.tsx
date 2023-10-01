@@ -15,8 +15,8 @@ export default function():ReactElement {
     return (
         <div className={styles.card}>
             <div className={`${styles.cardWrapper} ${isFlipped ? styles.isFlipped : ''}`}>
-                <FaceFront flip={flip} />
-                <FaceBack flip={flip} />
+                <FaceFront flip={flip} isFlipped={isFlipped} />
+                <FaceBack flip={flip} isFlipped={isFlipped} />
             </div>
         </div>
     )

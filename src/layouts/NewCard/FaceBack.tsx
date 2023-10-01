@@ -1,22 +1,25 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/Button";
 import DeleteButton from "../../components/DeleteButton";
 import TextInput from "../../components/TextInput/TextInput";
 import styles from '../../assets/styles/Card.module.css';
 import { FlipType } from "./types";
 import { NewCardContext } from "../../context/NewCardContext";
-// import { CardType, SaveCardProps } from "../Card/types";
 import { CardsContext } from "../../context/CardsContext";
 import useFetch from "../../hooks/useFetch";
 
-export default function({ flip }: FlipType):ReactElement {
+export default function({ flip, isFlipped }: FlipType):ReactElement {
 
     const { setText, cardsText, showNewCard } = useContext(NewCardContext) ?? {};
     const { saveCards } = useContext(CardsContext);
     const { error, saveCard } = useFetch();
 
+    useEffect(() => {
+        isFlipped && document.querySelectorAll('textarea')[1].focus();
+    }, [isFlipped]);
+
     const handleGetText = (value: string) => {
-        setText && cardsText && setText({ ...cardsText, back: value });
+        isFlipped && setText && cardsText && setText({ ...cardsText, back: value });
     }
 
     const handleClickSave = () => {

@@ -10,14 +10,14 @@
 
 .textarea{
     width:100%;
-    min-height:16px;
+    min-height:20px;
     overflow-wrap: break-word;
     -webkit-nbsp-mode: space;
     line-break: after-white-space;
     -webkit-user-modify: read-write-plaintext-only;
     color: var(--accent);
     font-size: 16px;
-    line-height: 16px;
+    line-height: 20px;
     font-weight: 500;
     border: none;
     outline: 0px solid transparent;
