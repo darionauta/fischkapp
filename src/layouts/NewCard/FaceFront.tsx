@@ -11,6 +11,11 @@ export default function ({ flip }: FlipType):ReactElement {
     const handleClick = () => {
         flip(true);
     }
+
+    const handleCancelClick = () => {
+        showNewCard && showNewCard(false);
+        setText && setText({front: '', back: ''});
+    }
     
     const handleFrontText = (value: string) => {
         setText && cardsText && setText({ ...cardsText, front: value});
@@ -21,7 +26,7 @@ export default function ({ flip }: FlipType):ReactElement {
         <div className={styles.cardFace}>
             <TextInput data-testid="input-front" text="" top={50} bottom={46} getText={handleFrontText} />
             <nav className={styles.bottomNav}>
-                <Button text="Cancel" onClick={_ => showNewCard(false)} />
+                <Button text="Cancel" onClick={handleCancelClick} />
                 <Button text="Next" primary onClick={handleClick}/>
             </nav>
         </div>
