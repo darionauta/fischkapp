@@ -26,6 +26,10 @@ function CardsContextProvider({ children }: PropsWithChildren) {
         getAll().then(setCards);
     }, [ getAll ]);
 
+    const saveNewCardOnTop = (card:CardType):void => {
+        setCards([card, ...cards]);
+    }
+
     const saveCards = (card: CardType):void => {
         let tmpCards = cards;
         let indexToUpdate = cards.findIndex(item => item._id === card._id);
@@ -33,7 +37,7 @@ function CardsContextProvider({ children }: PropsWithChildren) {
             tmpCards[indexToUpdate] = card;
             setCards([...tmpCards]);
         } else {
-            setCards([ ...cards, card]);
+            saveNewCardOnTop(card);
         }
     }
 

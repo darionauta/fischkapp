@@ -5,7 +5,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import styles from '../../assets/styles/Card.module.css';
 import { FlipType } from "./types";
 import { NewCardContext } from "../../context/NewCardContext";
-import { CardType, SaveCardProps } from "../Card/types";
+// import { CardType, SaveCardProps } from "../Card/types";
 import { CardsContext } from "../../context/CardsContext";
 import useFetch from "../../hooks/useFetch";
 
@@ -14,7 +14,6 @@ export default function({ flip }: FlipType):ReactElement {
     const { setText, cardsText, showNewCard } = useContext(NewCardContext) ?? {};
     const { saveCards } = useContext(CardsContext);
     const { error, saveCard } = useFetch();
-    
 
     const handleGetText = (value: string) => {
         setText && cardsText && setText({ ...cardsText, back: value });
