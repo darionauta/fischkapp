@@ -13,6 +13,14 @@ export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
     const [ cardText, setCardText ] = useState<CardType>(card);
     const { removeCard, saveCards } = useContext(CardsContext);
     const { error, deleteCard, updateCard } = useFetch();
+    const [ isSaveButtonDisbaled, setIsSaveButtonDisabled ] = useState(true);
+
+    useEffect(() => {
+        cardText.front.length > 0 && cardText.back.length > 0
+            ? setIsSaveButtonDisabled(false)
+            : setIsSaveButtonDisabled(true);
+
+    }, [ cardText.front, cardText.back ])
 
     const handleDeleteClick = () => {
         if(!card?._id) return;
@@ -47,7 +55,7 @@ export default function({ cardSide, setEditMode } : FaceProps):ReactElement {
             <TextInput top={50} bottom={46} text={cardSide === 'front' ? cardText?.front : cardText?.back} getText={handleGetText} />
             <nav className={styles.bottomNav}>
                 <Button text='Cancel' onClick={handleCancel} />
-                <Button text='Save' primary onClick={handleSaveClick} />
+                <Button text='Save' primary onClick={handleSaveClick} disabled={isSaveButtonDisbaled} />
             </nav>
         </div>
     )

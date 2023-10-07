@@ -1,12 +1,14 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import styles from '../../assets/styles/Card.module.css';
 import { NewCardContext } from "../../context/NewCardContext";
 import { FlipType } from "./types";
+import useCheckCardText from "../../hooks/useCheckCardText";
 
 export default function ({ flip, isFlipped }: FlipType):ReactElement {
     const { showNewCard, setText, cardsText } = useContext(NewCardContext) ?? {};
+    const [ isNextButtonDisabled ] = useCheckCardText(); 
 
     const handleClick = () => {
         flip(true);
@@ -27,7 +29,7 @@ export default function ({ flip, isFlipped }: FlipType):ReactElement {
             <TextInput data-testid="input-front" text="" top={50} bottom={46} getText={handleFrontText} />
             <nav className={styles.bottomNav}>
                 <Button text="Cancel" onClick={handleCancelClick} />
-                <Button text="Next" primary onClick={handleClick}/>
+                <Button text="Next" primary onClick={handleClick} disabled={isNextButtonDisabled} />
             </nav>
         </div>
     )

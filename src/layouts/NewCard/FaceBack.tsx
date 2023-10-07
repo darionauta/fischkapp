@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import DeleteButton from "../../components/DeleteButton";
 import TextInput from "../../components/TextInput/TextInput";
@@ -7,12 +7,14 @@ import { FlipType } from "./types";
 import { NewCardContext } from "../../context/NewCardContext";
 import { CardsContext } from "../../context/CardsContext";
 import useFetch from "../../hooks/useFetch";
+import useCheckCardText from "../../hooks/useCheckCardText";
 
 export default function({ flip, isFlipped }: FlipType):ReactElement {
 
     const { setText, cardsText, showNewCard } = useContext(NewCardContext) ?? {};
     const { saveCards } = useContext(CardsContext);
     const { error, saveCard } = useFetch();
+    const [, isSaveButtonDisabled ] = useCheckCardText();
 
     useEffect(() => {
         isFlipped && document.querySelectorAll('textarea')[1].focus();
@@ -50,7 +52,7 @@ export default function({ flip, isFlipped }: FlipType):ReactElement {
             <TextInput data-testid="inoput-back" top={8} bottom={46} getText={handleGetText} text='' />
             <nav className={styles.bottomNav}>
                 <Button text='Back' onClick={_ => flip(false)} />
-                <Button text='Save' primary onClick={handleClickSave} />
+                <Button text='Save' primary onClick={handleClickSave} disabled={isSaveButtonDisabled} />
             </nav>
         </div>
     )

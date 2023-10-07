@@ -16,6 +16,7 @@ export default function({ top, bottom, getText, text }: TextProps):ReactElement 
         // inputRef.current?.focus();
         let textField = document.querySelectorAll('textarea')[0];
         textField.focus();
+        textField.setSelectionRange(value.length, value.length);
     }, []);
     
     useEffect(() => {
@@ -37,7 +38,7 @@ export default function({ top, bottom, getText, text }: TextProps):ReactElement 
     if(bottom) { margins.marginBottom = bottom};
 
     return (
-        <div className={styles.container} style={margins}>
+        <div className={`${styles.container} ${value.length === 0 && styles.error}`} style={margins}>
             <textarea 
                 ref={inputRef} 
                 data-testid="textarea" 
