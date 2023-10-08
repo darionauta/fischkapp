@@ -6,18 +6,22 @@ type TextProps = {
     bottom?: number;
     getText?: (value: string) => void;
     text: string;
+    isError?: boolean;
+    isFlipped?: boolean;
 }
 
-export default function({ top, bottom, getText, text }: TextProps):ReactElement {
+export default function({ top, bottom, getText, text, isError, isFlipped = false }: TextProps):ReactElement {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const [ value, setValue ] = useState(text);
 
     useEffect(() => {
-        // inputRef.current?.focus();
-        let textField = document.querySelectorAll('textarea')[0];
+        let textField = isFlipped
+            ? document.querySelectorAll('textarea')[1]
+            : document.querySelectorAll('textarea')[0];
+        textField.style.display = 'flex';
         textField.focus();
         textField.setSelectionRange(value.length, value.length);
-    }, []);
+    }, [ isFlipped ]);
     
     useEffect(() => {
         if(!inputRef.current) return;
@@ -38,7 +42,7 @@ export default function({ top, bottom, getText, text }: TextProps):ReactElement 
     if(bottom) { margins.marginBottom = bottom};
 
     return (
-        <div className={`${styles.container} ${value.length === 0 && styles.error}`} style={margins}>
+        <div className={`${styles.container} ${isError ? styles.error : ''}`} style={margins}>
             <textarea 
                 ref={inputRef} 
                 data-testid="textarea" 

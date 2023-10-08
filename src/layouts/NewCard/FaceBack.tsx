@@ -15,6 +15,12 @@ export default function({ flip, isFlipped }: FlipType):ReactElement {
     const { saveCards } = useContext(CardsContext);
     const { error, saveCard } = useFetch();
     const [, isSaveButtonDisabled ] = useCheckCardText();
+    const [ isError, setIsError ] = useState(false);
+
+    useEffect(() => {
+        if(!cardsText) return;
+        if(!isSaveButtonDisabled) setIsError(false);
+    }, [ cardsText?.back ]);
 
     useEffect(() => {
         isFlipped && document.querySelectorAll('textarea')[1].focus();
@@ -25,7 +31,12 @@ export default function({ flip, isFlipped }: FlipType):ReactElement {
     }
 
     const handleClickSave = () => {
+        if(isError) return;
         if(!cardsText) return;
+        if(isSaveButtonDisabled) {
+            setIsError(true);
+            return;
+        };
         saveCard(cardsText).then(data => { 
             if(error || !data?.flashcard) return;
             const {front, back, _id} = data?.flashcard;
@@ -49,10 +60,17 @@ export default function({ flip, isFlipped }: FlipType):ReactElement {
                 { cardsText && cardsText.front }
             </span>
             <DeleteButton onClick={handleCancel} />
-            <TextInput data-testid="inoput-back" top={8} bottom={46} getText={handleGetText} text='' />
+            <TextInput 
+                data-testid="inoput-back" 
+                top={8} 
+                bottom={46} 
+                getText={handleGetText} 
+                text=''
+                isError={isError}
+            />
             <nav className={styles.bottomNav}>
                 <Button text='Back' onClick={_ => flip(false)} />
-                <Button text='Save' primary onClick={handleClickSave} disabled={isSaveButtonDisabled} />
+                <Button text='Save' primary onClick={handleClickSave} />
             </nav>
         </div>
     )
